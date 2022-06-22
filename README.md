@@ -12,6 +12,7 @@ Frontend code: https://github.com/shaniKupiec/Favorite-Colors-Frontend
 ## Features
 - Get colors from db
 - Add vote
+- Add and remove color
 
 
 ## Installation
