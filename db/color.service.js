@@ -22,6 +22,22 @@ async function getById(colorId) {
   }
 }
 
+async function add(color) {
+  try {
+    const data = {
+      color,
+      votes: 0
+    }
+    const collection = await dbService.getCollection('color')
+    const {insertedId} = await collection.insertOne(data)
+    data._id = insertedId
+    return data
+  } catch (err) {
+    console.log('cannot insert color', err)
+    throw err
+  }
+}
+
 async function update(color) {
   try {
     var id = ObjectId(color._id);
@@ -36,9 +52,22 @@ async function update(color) {
   }
 }
 
+async function remove(colorId) {
+  try {
+    const collection = await dbService.getCollection('color')
+    await collection.deleteOne({ _id: ObjectId(colorId) })
+    return colorId
+  } catch (err) {
+    console.log(`cannot remove color ${colorId}`, err)
+    throw err
+  }
+}
+
 
 module.exports = {
   query,
   getById,
+  add,
   update,
+  remove
 };
